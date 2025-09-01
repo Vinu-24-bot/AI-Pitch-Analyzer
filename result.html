@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Pitch Analysis Results</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    body { background: #16325c; color: #cfd9e5; font-family: "Segoe UI", "Roboto", sans-serif; margin: 0; padding: 40px 12px; min-height: 100vh;}
+    .container { max-width: 900px; width: 100%; background-color: #1f355b; border-radius: 14px; padding: 30px 32px; margin: auto;}
+    h2, h3 { color: #55acee; text-align: center; margin-bottom: 18px;}
+    table { width: 100%; border-collapse: collapse; font-size: 0.97rem; background-color: #1c2b50; border-radius: 6px; overflow: hidden;}
+    th, td {padding: 12px 14px; color: #cfd9e5; text-align: left; border-bottom: 1px solid #0f2345;}
+    th {background-color: #1a2a4a; font-weight: 600; color: #55acee;}
+    .score-badge {margin-top: 12px; font-weight: 600; text-align: center; padding: 8px 0; border-radius: 8px;}
+    .score-badge.low {background-color: #b03838;}
+    .score-badge.mid {background-color: #a5753e;}
+    .score-badge.high {background-color: #38b075; color: #103822;}
+    ul { padding-left: 18px; color: #c8daf9; font-size: 0.95rem; line-height: 1.6;}
+    p.summary { background-color: #203a6e; color: #d6e6fc; font-size: 0.97rem; padding: 15px 18px; border-radius: 8px; line-height: 1.5; border-left: 4px solid #55acee;}
+    .btn { background-color: #55acee; color: #143947; font-weight: 600; font-size: 1rem; padding: 10px 30px; border: none; border-radius: 8px; cursor: pointer; text-decoration: none;
+      transition: background-color 0.2s; min-width: 140px; text-align: center; margin: 18px auto 0 auto; display: block;}
+    .btn:hover { background-color: #3a8edc; color: #102b44;}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>🤖 Pitch Analysis Results</h2>
+    <h3>General Information</h3>
+    <table>
+      <tr><th>Startup Name</th><td>{{ startup }}</td></tr>
+      <tr><th>Submitted Format</th><td>{{ file_format }}</td></tr>
+      <tr><th>Pitch Duration</th><td>{{ duration }}</td></tr>
+      <tr><th>Date</th><td>{{ pitch_date }}</td></tr>
+      <tr><th>Confidence Level</th><td>{{ confidence }}</td></tr>
+    </table>
+    <h3>Performance Metrics (Out of 10)</h3>
+    <table>
+      <tr><th>Pacing ⏱</th><td>{{ metrics.pacing }}</td></tr>
+      <tr><th>Filler Words Score 🤔</th><td>{{ metrics.filler_words }}</td></tr>
+      <tr><th>Fumbling Score 🔄</th><td>{{ metrics.fumbling }}</td></tr>
+      <tr><th>Pitch Structure 🏗️</th><td>{{ metrics.pitch_structure }}</td></tr>
+      <tr><th>Total Score ⭐</th><td><b>{{ metrics.total_score }}</b></td></tr>
+    </table>
+    <div class="score-badge {% if metrics.total_score < 5 %}low{% elif metrics.total_score <= 7 %}mid{% else %}high{% endif %}">
+      {% if metrics.total_score < 5 %}
+        ⚠️ Needs Improvement – Work on clarity and structure.
+      {% elif metrics.total_score <= 7 %}
+        💡 Average Pitch – Good base, but needs polish.
+      {% else %}
+        🌟 Great Pitch – Well structured and engaging!
+      {% endif %}
+    </div>
+    <h3>Pitch Summary</h3>
+    <p class="summary">{{ transcript }}</p>
+    <a href="{{ url_for('upload_pitch') }}" class="btn">← Return to Home</a>
+  </div>
+</body>
+</html>

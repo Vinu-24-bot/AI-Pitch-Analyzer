@@ -1,0 +1,7 @@
+__pycache__/
+venv/
+uploads/
+training_audio/
+training_videos/
+*.pyc
+*.pkl

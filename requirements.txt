@@ -1,0 +1,9 @@
+Flask
+SpeechRecognition
+librosa
+pydub
+yt-dlp
+joblib
+pandas
+scikit-learn
+tqdm
